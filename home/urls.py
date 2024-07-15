@@ -5,4 +5,5 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('explore/<int:page>/', views.fetch_destinations, name='explore'),
 ]

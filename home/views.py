@@ -1,38 +1,53 @@
 import math
-
 import requests
 from django.http import HttpResponse
 from django.shortcuts import render
 from urllib.parse import quote
 from .models import TravelDestination
 
-
 def index(request):
     return render(request, "home/index.html", {})
 
-
 def fetch_destinations(request, page):
-    # page = int(request.GET.get('page', 1))
     limit = 30
     offset = (page - 1) * limit
 
-    # check if records are in cache database
+    # Check if records are in cache database
     saved_record_count = TravelDestination.objects.all().count()
 
-    # fill data if not sufficient
+    # Fill data if not sufficient
     if saved_record_count < 50:
         fetch_and_save_destinations()
 
-    # get data from cache database
-    stored_records = TravelDestination.objects.all()
+    # Get filter parameters
+    palm_level = request.GET.get('palm_level')
+    lodge_type = request.GET.get('lodge_type')
+    city = request.GET.get('city')
+    phy_addr = request.GET.get('phy_addr')
+
+    # Apply filters
+    filters = {}
+    if palm_level:
+        filters['palm_level'] = palm_level
+    if lodge_type:
+        filters['lodge_type'] = lodge_type
+    if city:
+        filters['city__icontains'] = city
+    if phy_addr:
+        filters['phy_addr__icontains'] = phy_addr
+
+    # Debug output
+    print(f"Filters: {filters}")
+
+    # Get data from cache database
+    stored_records = TravelDestination.objects.filter(**filters)
 
     page_data = stored_records[offset:offset + limit]
-    total_pages = math.ceil(saved_record_count / limit)
+    total_pages = math.ceil(stored_records.count() / limit)
 
     return render(request, 'home/explore.html', {'destinations': page_data, 'curr_page': page, "total_pages": total_pages})
 
-
-def fetch_and_save_destinations(offset=0, limit=50):
+def fetch_and_save_destinations(offset=0, limit=10):
     encoded_out_fields = quote('*')
 
     api_url = (f"https://ca.dep.state.fl.us/arcgis/rest/services/OpenData/OSI_DATA/MapServer/0/query?where=1%3D1"

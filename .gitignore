@@ -33,7 +33,6 @@ MANIFEST
 *.pyc
 *.pyo
 *.pyd
-*.sqlite3
 *.pdb
 *.egg-info/
 *.egg

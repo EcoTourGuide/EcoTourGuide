@@ -12,7 +12,7 @@ class TravelDestination(models.Model):
     zip_code = models.CharField(max_length=8, verbose_name="Zip")
     phone = models.CharField(max_length=16, verbose_name="Main Phone Number")
     web = models.URLField(max_length=250, verbose_name="Web Address")
-    lodge_type = models.CharField(max_length=100, verbose_name="Type of Lodging Facility")
+    lodge_type = models.CharField(max_length=100, verbose_name="Type of Lodging Facility", null=True)
     palm_level = models.CharField(max_length=10, verbose_name="Palm Level")
     latitude = models.DecimalField(max_digits=9, decimal_places=6, verbose_name="Latitude")
     longitude = models.DecimalField(max_digits=9, decimal_places=6, verbose_name="Longitude")

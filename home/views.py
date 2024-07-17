@@ -1,14 +1,18 @@
 import math
+
 import requests
 from django.http import HttpResponse
 from django.shortcuts import render
 from urllib.parse import quote
 from .models import TravelDestination
 
+
 def index(request):
     return render(request, "home/index.html", {})
 
+
 def fetch_destinations(request, page):
+    # page = int(request.GET.get('page', 1))
     limit = 30
     offset = (page - 1) * limit
 

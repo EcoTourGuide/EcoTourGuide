@@ -1,4 +1,14 @@
-/* styles.css */
+/* Import Poppins Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f0f0; /* Change this to the color you want */
+    margin: 0; /* Ensure no default margin around the body */
+    padding: 0; /* Ensure no default padding around the body */
+}
 
 .navbar {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 4px 0 6px rgba(0, 0, 0, 0.1);
@@ -10,6 +20,7 @@
     height: 60px;
     align-content: center;
     color: #13545e;
+    font-family: 'Poppins', sans-serif;
 }
 
 .navbar-brand img {
@@ -19,6 +30,7 @@
 .footer {
     background-color: #13545e;
     padding: 1rem 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 .copy-right {
@@ -26,16 +38,18 @@
     color: #f8f9fa;
     height: 40px;
     align-content: center;
+    font-family: 'Poppins', sans-serif;
 }
 
 .btn-social {
-    background-color: #f8f9fa;
-    color: #13545e;
+    background-color: #13545e;
+    color: #f8f9fa;
+    font-family: 'Poppins', sans-serif;
 }
 
 .btn-social:hover {
-    background-color: #13545e;
-    color: #f8f9fa;
+    background-color: #f8f9fa;
+    color: #13545e;
 }
 
 .navbar-nav .nav-item .nav-link.btn-sign {
@@ -46,6 +60,7 @@
     font-size: 16px;
     margin-left: 10px;
     transition: background-color 0.3s ease;
+    font-family: 'Poppins', sans-serif;
 }
 
 .navbar-nav .nav-item .nav-link.btn-signup {
@@ -56,10 +71,12 @@
     padding: 7px 15px;
     margin-left: 10px;
     transition: background-color 0.3s ease;
+    font-family: 'Poppins', sans-serif;
 }
 
 .navbar .navbar-nav .nav-link {
     color: #13545e;
+    font-family: 'Poppins', sans-serif;
 }
 
 /*.navbar .navbar-nav .nav-link:hover {*/
@@ -70,3 +87,106 @@
 /*.navbar-nav .nav-item .nav-link.btn-sign:hover {*/
 /*    background-color: #0056b3;*/
 /*}*/
+
+/*----------------------Jidnesh---------------------------*/
+
+
+.filter-box {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-bottom: 20px; /* Ensure there's space between the filter box and the cards */
+}
+.container {
+    margin-top: 20px;
+    padding-left: 5px;  /* Reduce padding on the left */
+    padding-right: 5px; /* Reduce padding on the right */
+    max-width: 100%;    /* Ensure the container takes full width */
+}
+
+@media (min-width: 576px) {
+    .container {
+        padding-left: 10px; /* Adjust as necessary for small screens */
+        padding-right: 10px; /* Adjust as necessary for small screens */
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding-left: 15px; /* Adjust as necessary for medium screens */
+        padding-right: 15px; /* Adjust as necessary for medium screens */
+    }
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.header-text {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #FDFDFD;
+    font-family: 'Poppins', sans-serif;
+
+}
+.h5 {
+    font-size: medium;
+    font-family: 'Poppins', sans-serif
+}
+.card-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Adjust the padding as needed */
+    background-color: #FDFDFD; /* Ensure there's a background color if needed */
+    border-radius: 5px;
+}
+
+.card-img-top {
+    max-width: 100%;
+    max-height: 200px; /* Adjust the height as needed */
+    object-fit: cover;
+    border-radius: 5px; /* Maintain rounded corners if needed */
+}
+
+
+
+.card-body {
+    padding: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #555;
+    font-family: 'Poppins', sans-serif;
+}
+
+.pagination .page-item .page-link {
+    color: #007bff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.pagination .page-item .page-link:hover {
+    color: #0056b3;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    font-family: 'Poppins', sans-serif;
+}
+

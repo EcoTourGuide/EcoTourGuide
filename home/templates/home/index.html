@@ -1,34 +1,35 @@
 {% extends 'base.html' %}
 
-{% block title %}Find Your Favorite Place{% endblock %}
+{% block title %}EcoTour Guide{% endblock %}
 
 {% block content %}
 <div class="hero-section">
     <div class="hero-image">
         <div class="hero-text">
-            <h1>Find your favorite place here!</h1>
-            <p>The best prices for over 2 million properties worldwide</p>
+            <h1>Discover the Beauty of Responsible Travel</h1>
+            <p>Embark on eco-friendly adventures that protect our planet while immersing you in breathtaking natural wonders. Travel responsibly and create unforgettable memories</p>
+        </div>
+        <div class="search-bar">
+           <div class="search-bar-item">
+                <input type="text" placeholder="Search For A Destination">
+           </div>
+           <button class="search-button">Search</button>
         </div>
     </div>
-    <div class="search-bar">
-        <div class="tabs">
-            <button class="tab-button active">All Accommodation</button>
-            <button class="tab-button">Villa</button>
-            <button class="tab-button">Hotel</button>
-            <button class="tab-button">Apartment</button>
-            <button class="tab-button">Home Stay</button>
-        </div>
-        <form class="search-form">
-            <input type="text" placeholder="Type the destination" class="search-input">
-            <input type="date" placeholder="Add date" class="search-input">
-            <input type="date" placeholder="Add date" class="search-input">
-            <input type="text" placeholder="Add guests" class="search-input">
-            <div class="duration-options">
-                <label><input type="radio" name="duration" value="night" checked> / Night</label>
-                <label><input type="radio" name="duration" value="hour"> / Hour</label>
-            </div>
-            <button type="submit" class="search-button">Search Accommodation</button>
-        </form>
+</div>
+
+<div class="explore-section">
+    <h2>Explore Popular Cities</h2>
+    <p>Wander into Wonder: Discover Cities that Never Sleep</p>
+    <div class="cities">
+        <button>New York</button>
+        <button>California</button>
+        <button>Alaska</button>
+        <button>Sidney</button>
+        <button>Dubai</button>
+        <button>London</button>
+        <button>Tokyo</button>
+        <button>Delhi</button>
     </div>
 </div>
 {% endblock %}

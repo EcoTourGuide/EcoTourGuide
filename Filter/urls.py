@@ -1,10 +1,7 @@
-# EcoTourGuideApp/urls.py
-
 from django.urls import path
 from . import views
 
-app_name = 'Filter'
-
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('profile/<int:user_id>/', views.profile, name='profile'),
+    # Add other paths if they exist
 ]

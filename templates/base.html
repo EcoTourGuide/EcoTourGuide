@@ -13,6 +13,7 @@
     <link href="{% static 'Filter/css/styles.css' %}" rel="stylesheet">
     <link href="{% static 'home/css/styles.css' %}" rel="stylesheet">
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <link href="{% static 'Filter/css/profile.css' %}" rel="stylesheet">
 </head>
 <body>
     <!-- Navbar -->
@@ -29,9 +30,7 @@
                     <a class="nav-link" href="{% url 'explore' 1 %}">Explore</a>
                 </li>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'Filter:index' %}">Filter</a>
-                </li>
+                
                 <li class="nav-item">
                     <a class="nav-link" href="#">About Us</a>
                 </li>

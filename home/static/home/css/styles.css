@@ -1,0 +1,289 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.hero-section {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.hero-image {
+    background-image: url('../images/theme_img.png'); /* Replace with the correct path to your image */
+    height: 588px;
+    width: 200vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+}
+
+.hero-text {
+    /*background-color: rgba(0, 0, 0, 0.5);*/
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/*.hero-text h1 {*/
+/*    font-size: 3em;*/
+/*    margin: 0;*/
+/*}*/
+
+/*.hero-text p {*/
+/*    font-size: 1.2em;*/
+/*    margin: 10px 0 0;*/
+/*}*/
+
+/*-----------------Home page styling-------------------------*/
+.hero-section {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.hero-image {
+    background-image: url('../images/theme_img.png'); /* Replace with the correct path to your image */
+    height: 70vh;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 3rem;
+    overflow: hidden;
+}
+
+.hero-text {
+    /*background-color: rgba(0, 0, 0, 0.5);*/
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+
+.hero-text h1 {
+    font-size: 2.8em;
+    margin-top: 4rem;
+}
+
+.hero-text p {
+    font-size: 1.1em;
+    margin: 10px 50px;
+}
+
+.search-bar {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.4);
+    align-items: center;
+    gap: 10px;
+    width: 26rem;
+    height: 4.3rem;
+    margin-top: 20px;
+    justify-content: space-between;
+    padding: 1.3rem;
+    border-radius: 20px;
+}
+
+.search-bar-item input {
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    width: 15rem;
+    outline: none;
+}
+
+.search-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 80px;
+    background-color: #8F9090;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    transition: box-shadow 0.3s ease;
+}
+
+.search-button:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adjust the values for the desired elevation effect */
+    border: none;
+}
+
+.search-button:focus {
+    outline: none; /* Ensure no outline on focus */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Maintain elevation effect on focus */
+}
+
+.explore-section {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.explore-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.explore-section p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.cities {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.cities button {
+    padding: 10px 20px;
+    border: 2px solid #6e9189;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    margin: 10px;
+    color: #4a4a4a;
+    background-color: #f8f9fa;
+}
+
+.cities button:hover {
+    background-color: #6e9189;
+    color: #f8f9fa;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+    .title-text h1 {
+        font-size: 2em;
+    }
+
+    .title-text p {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 992px) {
+    .title-text h1 {
+        font-size: 1.8em;
+    }
+
+    .title-text p {
+        font-size: 1em;
+    }
+
+    .search-bar-item input {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .title-text h1 {
+        font-size: 1.6em;
+    }
+
+    .title-text p {
+        font-size: 0.9em;
+    }
+
+    .search-bar {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .search-bar-item input {
+        width: 100%;
+    }
+
+    .search-button {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-image {
+        height: 300px;
+        background-size: cover;
+    }
+
+    .title-text h1 {
+        font-size: 1.4em;
+    }
+
+    .title-text p {
+        font-size: 0.8em;
+    }
+
+    .explore-section h2 {
+        font-size: 2em;
+    }
+
+    .explore-section p {
+        font-size: 1em;
+    }
+
+    .cities button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+}
+
+ /*Explore page styles*/
+/* styles.css */
+.container {
+    margin: auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.card-body {
+    text-align: center;
+}
+
+.pagination {
+    margin-top: 20px;
+}
+
+.page-link {
+    margin: 0 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.page-link:hover {
+    background-color: #f0f0f0;
+    border-color: #007bff;
+}
+
+.page-item.disabled .page-link {
+    background-color: #f0f0f0;
+    border-color: #ddd;
+    cursor: default;
+}

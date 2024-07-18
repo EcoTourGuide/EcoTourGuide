@@ -1,4 +1,13 @@
-/* styles.css */
+/* Import Poppins Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f0f0f0; /* Change this to the color you want */
+  margin: 0; /* Ensure no default margin around the body */
+  padding: 0; /* Ensure no default padding around the body */
+}
 
 .navbar {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 4px 0 6px rgba(0, 0, 0, 0.1);

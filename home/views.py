@@ -1,6 +1,7 @@
 import math
 
 import requests
+from django.db.models import Avg
 from django.http import HttpResponse
 from django.shortcuts import render
 from urllib.parse import quote
@@ -100,3 +101,29 @@ def fetch_and_save_destinations(offset=0, limit=10):
     else:
         print("Failed to fetch data from the API. Status code:", response.status_code)
         return -1
+
+def details(request, destination_id):
+    destination = TravelDestination.objects.get(pk=destination_id)
+    destination_details = TravelDestinationDetails.objects.get(pk=destination_id)
+    reviews = Review.objects.filter(reviewed_facility__object_id=destination_id)
+
+    # calculating avg rating
+    avg = reviews.aggregate(Avg('rating'))['rating__avg']
+    print("avg is: ", avg)
+    average_rating = 0 if avg is None else math.floor(avg)
+
+    # getting nearby destinations
+    all_destinations = TravelDestination.objects.all()
+    nearby_destinations = TravelDestination.objects.filter(city=destination.city)
+
+    context = {
+        'destination': destination,
+        'destination_details': destination_details,
+        'palm_rating_range': range(int(destination.palm_level)),
+        'average_rating': average_rating,
+        'total_reviews': reviews.count(),
+        'nearby_destinations': nearby_destinations,
+        'reviews': reviews
+    }
+
+    return render(request, "home/details.html", context)

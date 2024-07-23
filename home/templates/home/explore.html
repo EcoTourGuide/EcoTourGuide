@@ -55,7 +55,7 @@
                             <h5 class="h5">{{ destination.lodge_type }}</h5>
                             <p class="card-text"><i class="fas fa-map-marker-alt"></i> {{ destination.phy_addr }}, {{ destination.city }}, {{ destination.zip_code }}</p>
                             <p class="card-text"><i class="fas fa-phone"></i> Phone: {{ destination.phone }}</p>
-                            <p class="card-text"><i class="fas fa-link"></i> <a href="{{ destination.web }}" target="_blank">Visit the site</a></p>
+                            <p class="card-text"><i class="fas fa-link"></i> <a href="{{ destination.web }}" target="_blank" onclick="recordVisit('{{ destination.prop_name }}', '{{ destination.web }}')">Visit the site</a></p>
                             <p class="card-text"><i class="fas fa-tree"></i> Palm Level: {{ destination.palm_level }}</p>
                         </div>
                     </div>
@@ -86,4 +86,26 @@
         </div>
     </div>
 </div>
+
+<script>
+  function recordVisit(siteName, siteUrl) {
+    fetch("{% url 'record_visit' %}", {
+      method: "POST",
+      body: JSON.stringify({ site_name: siteName, url: siteUrl }),
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value,
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status !== 'success') {
+        alert("Failed to record visit.");
+      }
+    })
+    .catch(error => {
+      console.error("Error recording visit:", error);
+    });
+  }
+</script>
 {% endblock %}

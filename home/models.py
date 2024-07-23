@@ -1,6 +1,4 @@
-# home/models.py
 from django.db import models
-
 
 class TravelDestination(models.Model):
     object_id = models.AutoField(primary_key=True)
@@ -16,6 +14,9 @@ class TravelDestination(models.Model):
     palm_level = models.CharField(max_length=10, verbose_name="Palm Level")
     latitude = models.DecimalField(max_digits=9, decimal_places=6, verbose_name="Latitude")
     longitude = models.DecimalField(max_digits=9, decimal_places=6, verbose_name="Longitude")
+    image1 = models.URLField(max_length=2000, null=True, blank=True)
+    image2 = models.URLField(max_length=2000, null=True, blank=True)
+    image3 = models.URLField(max_length=2000, null=True, blank=True)
 
     def __str__(self):
         return self.prop_name

@@ -1,0 +1,45 @@
+<div class="card mb-4">
+    <div class="card-body">
+        <h3 class="pInformation">Personal Information</h3>
+        <form method="post" action="{% url 'profile_information' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group row">
+                <label class="ml-3 col-form-label">{{ user_form.first_name.label_tag }}</label>
+                <div class="col-sm-12">
+                    {{ user_form.first_name }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="ml-3 col-form-label">{{ user_form.last_name.label_tag }}</label>
+                <div class="col-sm-12">
+                    {{ user_form.last_name }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="ml-3 col-form-label">{{ user_form.email.label_tag }}</label>
+                <div class="col-sm-12">
+                    {{ user_form.email }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="ml-3 col-form-label">{{ profile_form.date_of_birth.label_tag }}</label>
+                <div class="col-sm-12">
+                    {{ profile_form.date_of_birth }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="ml-3 col-form-label">{{ profile_form.phone.label_tag }}</label>
+                <div class="col-sm-12">
+                    {{ profile_form.phone }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="ml-3 col-form-label">{{ profile_form.location.label_tag }}</label>
+                <div class="col-sm-12">
+                    {{ profile_form.location }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Save</button>
+        </form>
+    </div>
+</div>

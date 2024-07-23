@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import UserProfile,History,UnsplashImage
 
-# Register your models here.
+# Register the UserProfile model
+admin.site.register(UserProfile)
+admin.site.register(History)
+admin.site.register(UnsplashImage)
+

@@ -8,93 +8,112 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body text-center">
-                    <img src="{% static 'images/default_profile_pic.png' %}" class="rounded-circle mb-3" alt="Profile Picture" width="150" height="150">
-                    <h3>{{ user.get_full_name }}</h3>
-                    <p>{{ user.userprofile.location }}</p>
-                    <p>{{ user.userprofile.date_of_birth }}</p>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item profile_list active">Profile Information</li>
-                        <li class="list-group-item profile_list"><a href="#">Booking History</a></li>
-                        <li class="list-group-item profile_list"><a href="#">Newsletter Subscription</a></li>
-                        <li class="list-group-item profile_list"><a href="#">Manage Notifications</a></li>
-                    </ul>
+                    <div class="profile-photo-container w-75">
+                        {% if request.user.userprofile.profile_photo %}
+                        <img
+                            id="profile-photo"
+                            src="{{ request.user.userprofile.profile_photo.url }}"
+                            class="rounded-circle mb-3 profile-photo"
+                            alt="Profile Picture"
+                        />
+                        {% else %}
+                        <img
+                            id="profile-photo"
+                            src="{% static 'images/default_profile_pic.png' %}"
+                            class="rounded-circle profile-photo"
+                            alt="Profile Picture"
+                        />
+                        {% endif %}
+                        <form id="photo-form" method="post" enctype="multipart/form-data" onsubmit="uploadPhoto(event)">
+                            {% csrf_token %}
+                            {{ photo_form.profile_photo }}
+                            <button type="submit" class="btn btn-success btn-block mt-2 upload-button">Upload Photo</button>
+                        </form>
+                    </div>
+                    <h3 class="mt-2">{{ request.user.get_full_name }}</h3>
+                    <p>{{ request.user.userprofile.location }}</p>
+                    <p>{{ request.user.userprofile.date_of_birth }}</p>
+                    <div class="tab_div">
+                        <ul class="nav nav-tabs w-100" id="profileTabs" role="tablist">
+                            <li class="nav-item w-100">
+                                <a class="nav-link active w-100 text-left p-3" id="profile-information-tab" href="javascript:void(0);" onclick="loadTabContent('{% url 'profile_information' %}', 'profile-information-tab')">Profile Information</a>
+                            </li>
+                            <li class="nav-item w-100">
+                                <a class="nav-link w-100 text-left p-3" id="user-history-tab" href="javascript:void(0);" onclick="loadTabContent('{% url 'user_history' %}', 'user-history-tab')">User History</a>
+                            </li>
+                            <li class="nav-item w-100">
+                                <a class="nav-link w-100 text-left p-3" id="newsletter-subscription-tab" href="javascript:void(0);" onclick="loadTabContent('{% url 'newsletter_subscription' %}', 'newsletter-subscription-tab')">Newsletter Subscription</a>
+                            </li>
+                            <li class="nav-item w-100">
+                                <a class="nav-link w-100 text-left p-3" id="manage-notifications-tab" href="javascript:void(0);" onclick="loadTabContent('{% url 'manage_notifications' %}', 'manage-notifications-tab')">Manage Notifications</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-8">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h3 class="pInformation">Personal Information</h3>
-                    <form method="post">
-                        {% csrf_token %}
-                        <div class="form-group row">
-                            <label class="ml-3 col-form-label">{{ user_form.first_name.label_tag }}</label>
-                            <div class="col-sm-12">
-                                {{ user_form.first_name }}
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="ml-3 col-form-label">{{ user_form.last_name.label_tag }}</label>
-                            <div class="col-sm-12">
-                                {{ user_form.last_name }}
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="ml-3 col-form-label">{{ user_form.email.label_tag }}</label>
-                            <div class="col-sm-12">
-                                {{ user_form.email }}
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="ml-3 col-form-label">{{ profile_form.date_of_birth.label_tag }}</label>
-                            <div class="col-sm-12">
-                                {{ profile_form.date_of_birth }}
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="ml-3 col-form-label">{{ profile_form.phone.label_tag }}</label>
-                            <div class="col-sm-12">
-                                {{ profile_form.phone }}
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="ml-3 col-form-label">{{ profile_form.location.label_tag }}</label>
-                            <div class="col-sm-12">
-                                {{ profile_form.location }}
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-success btn-block">Save</button>
-                    </form>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="security_text">Security</h3>
-                    <form method="post">
-                        {% csrf_token %}
-                        <div class="form-group row">
-                            <label class="ml-3 col-form-label">{{ user_form.email.label_tag }}</label>
-                            <div class="col-sm-12">
-                                {{ user_form.email }}
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="ml-3 col-form-label" for="password">Password</label>
-                            <div class="col-sm-12">
-                                <input type="password" class="form-control field" id="password" name="password">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="ml-3 col-form-label" for="confirm_password">Confirm Password</label>
-                            <div class="col-sm-12">
-                                <input type="password" class="form-control field" id="confirm_password" name="confirm_password">
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-success btn-block">Save</button>
-                    </form>
-                </div>
+            <div id="tab-content" class="tab-content">
+                <!-- Tab content will be loaded here -->
             </div>
         </div>
     </div>
 </div>
+
+<script>
+  function uploadPhoto(event) {
+    event.preventDefault();
+    var form = document.getElementById("photo-form");
+    var formData = new FormData(form);
+
+    fetch("{% url 'profile_photo_upload' %}", {
+      method: "POST",
+      body: formData,
+      headers: {
+        "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value,
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'success') {
+        document.getElementById("profile-photo").src = data.photo_url;
+      } else {
+        alert("Failed to upload photo.");
+      }
+    })
+    .catch(error => {
+      console.error("Error uploading photo:", error);
+      alert("Error uploading photo.");
+    });
+  }
+
+  function loadTabContent(url, tabId) {
+    fetch(url)
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById("tab-content").innerHTML = html;
+        setActiveTab(tabId);
+      })
+      .catch(error => {
+        console.error("Error loading tab content:", error);
+        document.getElementById("tab-content").innerHTML = "<p>Error loading content. Please try again.</p>";
+      });
+  }
+
+  function setActiveTab(tabId) {
+    const tabs = document.querySelectorAll(".nav-link");
+    tabs.forEach(tab => {
+      if (tab.id === tabId) {
+        tab.classList.add("active");
+      } else {
+        tab.classList.remove("active");
+      }
+    });
+  }
+
+  // Load default tab content
+  document.addEventListener("DOMContentLoaded", () => {
+    loadTabContent("{% url 'profile_information' %}", 'profile-information-tab');
+  });
+</script>
 {% endblock %}

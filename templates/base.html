@@ -14,6 +14,7 @@
     <link href="{% static 'home/css/styles.css' %}" rel="stylesheet">
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <link href="{% static 'Filter/css/profile.css' %}" rel="stylesheet">
+    
 </head>
 <body>
     <!-- Navbar -->
@@ -40,12 +41,24 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Coupons and Promos</a>
                 </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ user.username }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </li>
+                {% else %}
                 <li class="nav-item">
                     <a class="nav-link btn-sign" href="{% url 'authentication:login' %}">Sign in</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn-signup" href="#">Sign up</a>
+                    <a class="nav-link btn-signup" href="{% url 'authentication:signup' %}">Sign up</a>
                 </li>
+                {% endif %}
             </ul>
         </div>
     </nav>

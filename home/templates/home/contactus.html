@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <img src="{% static 'images/logo.png' %}" alt="EcoTourGuide Logo" style="height: 50px;">
+        <h1 class="my-4">Contact Us</h1>
+        <p>We’re here to help! Send us your query via the form below or send us an email at <a href="mailto:support@ecotourguide.com">support@ecotourguide.com</a> for any issue you’re facing</p>
+    </div>
+    <div class="contact-container d-flex justify-content-center">
+        <div class="contact-form p-5">
+            <form method="post" action="{% url 'contactus' %}" id="contact-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.name }}
+                </div>
+                <div class="form-group">
+                    {{ form.email }}
+                </div>
+                <div class="form-group">
+                    {{ form.message }}
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="contact-image">
+            <img src="{% static 'home/images/contactus1.png' %}" alt="Contact Us Image">
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form');
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent default form submission
+
+        let formData = new FormData(form);
+
+        fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': form.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    title: 'Success!',
+                    text: data.message,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    window.location.reload(); // Reload the page to clear the form
+                });
+            } else {
+                let errorMessage = 'Error sending message. Please try again.';
+                if (data.errors) {
+                    errorMessage = Object.keys(data.errors).map(field => {
+                        return data.errors[field].map(error => error.message).join(' ');
+                    }).join(' ');
+                }
+                Swal.fire({
+                    title: 'Error!',
+                    text: errorMessage,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            Swal.fire({
+                title: 'Error!',
+                text: 'Error sending message. Please try again.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

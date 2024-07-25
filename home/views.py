@@ -2,13 +2,13 @@ import math
 
 import requests
 from django.db.models import Avg
-from django.http import HttpResponse
-from django.shortcuts import render
-from urllib.parse import quote
-from .models import TravelDestination
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from urllib.parse import quote
 from django.contrib import messages
+from .forms import ContactForm
+from .models import TravelDestination, ContactMessage
+
 
 def index(request):
     return render(request, "home/index.html", {})
@@ -138,3 +138,35 @@ def details(request, destination_id):
     }
 
     return render(request, "home/details.html", context)
+
+
+
+def aboutus(request):
+    return render(request, 'home/aboutus.html')
+
+
+
+
+
+# contact/views.py
+
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                return JsonResponse({'success': True, 'message': 'Message sent successfully!'})
+            messages.success(request, 'Message sent successfully!')
+            return redirect('contact')
+        else:
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                errors = form.errors.as_json()
+                return JsonResponse({'success': False, 'errors': errors}, status=400)
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        form = ContactForm()
+    return render(request, 'home/contactus.html', {'form': form})
+
+

@@ -5,10 +5,9 @@ from django.db.models import Avg
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from urllib.parse import quote
-
+from django.contrib import messages
 from .forms import ContactForm
 from .models import TravelDestination, ContactMessage
-from django.contrib import messages
 
 
 def index(request):
@@ -104,6 +103,15 @@ def fetch_and_save_destinations(offset=0, limit=10):
     else:
         print("Failed to fetch data from the API. Status code:", response.status_code)
         return -1
+
+###############JIDNESH###############
+def support(request):
+    return render(request, 'home/support.html')
+def contact_us(request):
+    return render(request, 'home/contact_us.html')
+
+def terms_policies(request):
+    return render(request, 'home/terms_policies.html')
 
 def details(request, destination_id):
     destination = TravelDestination.objects.get(pk=destination_id)

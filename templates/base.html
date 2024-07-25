@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StayHub</title>
+    <title>EcoTourGuide</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Free Rich Icon Library -->
@@ -20,7 +20,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="{% url 'index' %}">
-            <img src="{% static 'home/images/logo.png' %}" alt="StayHub Logo" style="height: 50px;">
+            <img src="{% static 'home/images/logo.png' %}" alt="EcoTourGuide Logo" style="height: 50px;">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -28,18 +28,15 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'explore' 1 %}">Explore</a>
+                    <a class="nav-link" href="{% url 'index' %}">Home</a>
                 </li>
                 </li>
                 
                 <li class="nav-item">
+                    <a class="nav-link" href="{% url 'explore' 1 %}">Explore</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Activity</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Coupons and Promos</a>
                 </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
@@ -71,13 +68,43 @@
 
     <!-- Footer -->
     <footer class="footer bg-light text-center text-lg-start mt-auto">
-        <div class="container p-4">
+        <div class="container-fluid bg-light text-dark mt-4 py-3">
             <div class="row">
-                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">StayHub</h5>
-                    <p>The best prices for over 2 million properties worldwide.</p>
+                <div class="col-md-4 mb-3">
+                    <a class="navbar-brand" href="#">
+                        <img src="{% static 'home/images/logo.png' %}" alt="EcoTourGuide Logo" style="height: 50px;">
+                    </a>
+                    <p>Your next goto companion for travel</p>
                 </div>
-                <div class="col-lg-6 col-md-12 mb-4 mb-md-0 text-right">
+                <div class="col-md-2 mb-3">
+                    <h5>About</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#", style="color: black">About</a></li>
+                        <li><a href="{% url 'contact' %}", style="color: black" >Contact us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <h5>Destinations</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#", style="color: black">Australia</a></li>
+                        <li><a href="#", style="color: black">New Zealand</a></li>
+                        <li><a href="#", style="color: black">United States America (USA)</a></li>
+                        <li><a href="#", style="color: black">Greece</a></li>
+                        <li><a href="#", style="color: black">Maldives</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'terms-policies' %}", style="color: black">Privacy Policy</a></li>
+                        <li><a href="{% url 'terms-policies' %}", style="color: black">Terms of use</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <h5>Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'support' %}", style="color: black"> Support </a></li>
+                    </ul>
                     <a href="#" class="btn btn-outline-dark btn-social mx-1">
                         <i class="fab fa-facebook-f"></i>
                     </a>
@@ -90,9 +117,10 @@
                 </div>
             </div>
         </div>
-        <div class="copy-right">
-            &copy; 2024 StayHub. All Rights Reserved.
+        <div class="text-dark text-center py-3" style="background-color: #B4CEA8;">
+                &copy; EcoTourGuide 2024
         </div>
+
     </footer>
 
     <!-- Bootstrap JS, Popper.js, and jQuery -->

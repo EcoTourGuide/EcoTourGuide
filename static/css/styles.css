@@ -70,12 +70,213 @@ body {
 .navbar .navbar-nav .nav-link {
   color: #13545e;
 }
+/*----------------------Jidnesh---------------------------*/
+/* Custom styles for Terms and Policies page */
+.terms-box, .privacy-box {
+    background-color: #B4CEA8;
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 600px;
+    width: 100%;
+    margin-bottom: 20px;
+}
 
-/*.navbar .navbar-nav .nav-link:hover {*/
-/*    color: #13545e;*/
-/*    font-weight: bold;*/
-/*}*/
+.terms-box ul, .privacy-box ul {
+    list-style-type: none;
+    padding: 0;
+}
 
-/*.navbar-nav .nav-item .nav-link.btn-sign:hover {*/
-/*    background-color: #0056b3;*/
-/*}*/
+.terms-box li, .privacy-box li {
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.terms-box li strong, .privacy-box li strong {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.terms-box ul ul, .privacy-box ul ul {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.privacy-box ul ul li {
+    list-style-type: disc;
+}
+
+/* Custom styles for Contact Us page */
+.container .contact-form {
+    background-color: #B4CEA8;
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 600px;
+    width: 100%;
+}
+
+.container .contact-form .form-control {
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.container .contact-form .btn {
+    background-color: #A0C591;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.container .contact-image img {
+    max-width: 400px;
+    margin-left: 20px;
+}
+
+/* Custom styles for Support Center */
+.list-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px; /* Added gap between each item */
+}
+
+.list-group-item {
+    background-color: #B4CEA8;
+    border: none;
+    margin-bottom: 0; /* Removed margin-bottom as gap is managed by the flex container */
+    color: #ffffff;
+    font-size: 1.1em;
+    padding: 15px 20px;
+    border-radius: 5px;
+    width: 100%; /* Make all boxes equal width */
+    max-width: 600px; /* Center and limit the width of the items */
+    text-align: center; /* Center text inside the boxes */
+}
+
+.list-group-item:hover {
+    background-color: #9ab991;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.text-center img {
+    margin-bottom: 20px;
+}
+/* Custom styles for Support Center */
+.list-group-item {
+    cursor: pointer;
+}
+
+.card-body {
+    background-color: #ffffff;
+    border: 1px solid #B4CEA8;
+    border-top: none;
+    padding: 20px;
+}
+
+.collapse:not(.show) {
+    display: none;
+}
+
+
+
+
+
+.filter-box {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-bottom: 20px; /* Ensure there's space between the filter box and the cards */
+}
+.container {
+    margin-top: 20px;
+    padding-left: 5px;  /* Reduce padding on the left */
+    padding-right: 5px; /* Reduce padding on the right */
+    max-width: 100%;    /* Ensure the container takes full width */
+}
+
+@media (min-width: 576px) {
+    .container {
+        padding-left: 10px; /* Adjust as necessary for small screens */
+        padding-right: 10px; /* Adjust as necessary for small screens */
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding-left: 15px; /* Adjust as necessary for medium screens */
+        padding-right: 15px; /* Adjust as necessary for medium screens */
+    }
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.header-text {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #FDFDFD;
+    font-family: 'Poppins', sans-serif;
+
+}
+.h5 {
+    font-size: medium;
+    font-family: 'Poppins', sans-serif
+}
+.card-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Adjust the padding as needed */
+    background-color: #FDFDFD; /* Ensure there's a background color if needed */
+    border-radius: 5px;
+}
+
+.card-img-top {
+    max-width: 100%;
+    max-height: 200px; /* Adjust the height as needed */
+    object-fit: cover;
+    border-radius: 5px; /* Maintain rounded corners if needed */
+}
+
+
+
+.card-body {
+    padding: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #555;
+    font-family: 'Poppins', sans-serif;
+}
+
+.pagination .page-item .page-link {
+    color: #007bff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.pagination .page-item .page-link:hover {
+    color: #0056b3;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    font-family: 'Poppins', sans-serif;
+}
+

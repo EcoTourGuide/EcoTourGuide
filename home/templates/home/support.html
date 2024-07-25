@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="header-text">
+        <h1>Support Center</h1>
+        <p>Browse through our frequently asked questions, tutorials, and other self-help resources to find the answers you need.</p>
+    </div>
+    <div class="list-group">
+        <button class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#answer1" aria-expanded="false" aria-controls="answer1">
+            1. How does EcoTourGuide ensure the travel destinations recommended are truly eco-friendly?
+        </button>
+        <div class="collapse" id="answer1">
+            <div class="card card-body">
+                EcoTourGuide is dedicated to promoting sustainable tourism by thoroughly researching and recommending destinations that adhere to high environmental standards. We independently verify that these destinations implement eco-friendly practices, such as using renewable energy, minimizing waste, and supporting local communities. Our selection process includes evaluating certifications from recognized environmental organizations and continuously monitoring their sustainability efforts. By doing so, EcoTourGuide ensures that the travel options we recommend are both economical and environmentally responsible, providing you with reliable and eco-conscious choices.
+            </div>
+        </div>
+
+        <button class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#answer2" aria-expanded="false" aria-controls="answer2">
+            2. What criteria should I consider when selecting an economical and eco-friendly travel destination?
+        </button>
+        <div class="collapse" id="answer2">
+            <div class="card card-body">
+                When using EcoTourGuide to select a travel destination, it's important to consider several key criteria. First, assess the cost, including accommodation, food, and activities, to ensure it fits your budget. Next, evaluate the environmental impact by choosing destinations with eco-friendly certifications or practices, such as renewable energy usage and waste management programs. Supporting local businesses and communities is another vital factor, as it promotes sustainable economic development. Additionally, consider the transportation options to minimize your carbon footprint, opting for low-emission modes like trains or buses. By considering these criteria, you can make informed decisions that balance economy and sustainability.
+            </div>
+        </div>
+
+        <button class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#answer3" aria-expanded="false" aria-controls="answer3">
+            3. How can I minimize my environmental impact while traveling?
+        </button>
+        <div class="collapse" id="answer3">
+            <div class="card card-body">
+                EcoTourGuide encourages travelers to adopt eco-friendly habits to minimize their environmental impact. One effective way is to travel light, as reducing luggage weight helps lower fuel consumption. Choosing accommodations with green certifications ensures you are supporting sustainable practices. Supporting local economies by dining at local restaurants and purchasing from local markets also contributes to sustainability. Opting for public transportation, such as buses, trains, or bicycles, over car rentals reduces emissions. Additionally, conserving resources by being mindful of water and energy usage, like turning off lights and taking shorter showers, further reduces your environmental footprint while traveling.
+            </div>
+        </div>
+
+        <button class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#answer4" aria-expanded="false" aria-controls="answer4">
+            4. What are the benefits of choosing eco-friendly travel options?
+        </button>
+        <div class="collapse" id="answer4">
+            <div class="card card-body">
+                Choosing eco-friendly travel options through EcoTourGuide offers a multitude of benefits. Environmentally, it reduces your carbon footprint and helps preserve natural habitats and biodiversity. Economically, it supports local businesses and communities, fostering sustainable development. Health-wise, eco-friendly travel often involves more outdoor activities and access to healthier food options, promoting a healthier lifestyle. Moreover, eco-friendly travel provides a more authentic and enriching experience, allowing deeper connections with local cultures and environments. By prioritizing sustainability, you contribute to the well-being of the planet and enjoy a more fulfilling travel experience.
+            </div>
+        </div>
+
+        <button class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#answer5" aria-expanded="false" aria-controls="answer5">
+            5. How does EcoTourGuide curate and verify the travel deals offered?
+        </button>
+        <div class="collapse" id="answer5">
+            <div class="card card-body">
+                EcoTourGuide employs a meticulous process to curate and verify travel deals, ensuring they meet our standards for economy and eco-friendliness. We conduct thorough research to find the best travel deals that align with our eco-friendly criteria. Each deal is verified for accuracy, availability, and adherence to sustainable practices. We continuously update our database to ensure that the most current and relevant deals are available to you. This rigorous process ensures that every deal recommended by EcoTourGuide is both economical and environmentally responsible, providing you with the best travel options available.
+            </div>
+        </div>
+
+        <button class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#answer6" aria-expanded="false" aria-controls="answer6">
+            6. Where will I have to pay – on EcoTourGuide or the website you link to?
+        </button>
+        <div class="collapse" id="answer6">
+            <div class="card card-body">
+                When you find a travel deal through EcoTourGuide, you will not make any payments on our website. Instead, you will be directed to the third-party website offering the deal. All transactions, including payments, bookings, and any further inquiries, will be handled directly by the provider of the deal. Our website ensures that these providers are credible and environmentally responsible by evaluating their environmental performance based on initiatives like the Florida Green Lodging Program. This program, an initiative of the Florida Department of Environmental Protection (DEP), designates and recognizes lodging facilities committed to conserving and protecting Florida’s natural resources. By using these guidelines, we help you choose accommodations that meet high environmental standards, ensuring a sustainable travel experience.
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-5">
+        <p>Have more questions?</p>
+        <p>Contact Us at <a href="mailto:support@ecotourguide.com">support@ecotourguide.com</a></p>
+    </div>
+</div>
+
+<!-- Include Bootstrap JS and dependencies for the collapse functionality -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Submit a Review</title>
+        <!-- Include Bootstrap CSS for styling -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .review-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .review-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-control {
+            border-radius: 8px;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="review-container">
+            <h2>Submit a Review</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="rating">Rating</label>
+                    <select id="rating" name="rating" class="form-control" required>
+                        <option value="" disabled selected>Select your rating</option>
+                        {% for value, label in review_form.fields.rating.choices %}
+                            <option value="{{ value }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="review-title">Review Title</label>
+                    <input type="text" id="review-title" name="review_title" class="form-control" placeholder="Enter review title">
+                </div>
+                <div class="form-group">
+                    <label for="review-text">Review Text</label>
+                    <textarea id="review-text" name="review_text" class="form-control" rows="5" placeholder="Write your review"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="date-of-visit">Date of Visit</label>
+                    <input type="date" id="date-of-visit" name="date_of_visit" class="form-control" required>
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" id="recommend" name="recommend" class="form-check-input">
+                    <label for="recommend" class="form-check-label">I recommend this destination</label>
+                </div>
+                <button type="submit" class="btn btn-success btn-block mt-3" style="background-color: #13545e">Submit Review</button>
+            </form>
+        </div>
+
+         <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                {% if review_submitted %}
+                // Show thank you message
+                alert("Thank you for your review!");
+
+                // Redirect to the details page after 2 seconds
+                setTimeout(function() {
+                    window.location.href = "{% url 'details' destination_id %}";
+                }, 1000);
+                {% endif %}
+
+                const dateInput = document.querySelector('input[type="date"]');
+                if (dateInput) {
+                    const today = new Date().toISOString().split('T')[0];
+                    dateInput.setAttribute('max', today);
+                }
+            });
+        </script>
+    </body>
+</html>

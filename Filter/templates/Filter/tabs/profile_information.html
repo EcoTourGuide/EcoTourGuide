@@ -43,3 +43,117 @@
         </form>
     </div>
 </div>
+
+<!-- Modal for errors -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Form Errors</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>There are errors in your form. Please correct them and try again.</p>
+                {% for field in user_form %}
+                    {% if field.errors %}
+                        <div class="alert alert-danger">{{ field.label }}: {{ field.errors }}</div>
+                    {% endif %}
+                {% endfor %}
+                {% for field in profile_form %}
+                    {% if field.errors %}
+                        <div class="alert alert-danger">{{ field.label }}: {{ field.errors }}</div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if form_errors %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            $('#errorModal').modal('show');
+        });
+    </script>
+{% endif %}
+
+<!-- Modal for errors -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Form Errors</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>There are errors in your form. Please correct them and try again.</p>
+                {% for field in user_form %}
+                    {% if field.errors %}
+                        <div class="alert alert-danger">{{ field.label }}: {{ field.errors }}</div>
+                    {% endif %}
+                {% endfor %}
+                {% for field in profile_form %}
+                    {% if field.errors %}
+                        <div class="alert alert-danger">{{ field.label }}: {{ field.errors }}</div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if form_errors %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            $('#errorModal').modal('show');
+        });
+    </script>
+{% endif %}
+
+<!-- Modal for errors -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Form Errors</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>There are errors in your form. Please correct them and try again.</p>
+                {% for field in user_form %}
+                    {% if field.errors %}
+                        <div class="alert alert-danger">{{ field.label }}: {{ field.errors }}</div>
+                    {% endif %}
+                {% endfor %}
+                {% for field in profile_form %}
+                    {% if field.errors %}
+                        <div class="alert alert-danger">{{ field.label }}: {{ field.errors }}</div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if form_errors %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            $('#errorModal').modal('show');
+        });
+    </script>
+{% endif %}

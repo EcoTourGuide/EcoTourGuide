@@ -1,7 +1,8 @@
 # contact/forms.py
 
 from django import forms
-from .models import ContactMessage
+from .models import ContactMessage, Review
+
 
 class ContactForm(forms.ModelForm):
     class Meta:
@@ -23,4 +24,17 @@ class ContactForm(forms.ModelForm):
             'message': {
                 'required': 'Message is required.',
             },
+        }
+
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['name', 'rating', 'review_title', 'review_text', 'date_of_visit', 'recommend']
+
+        labels = {
+            'rating': 'Rating: An integer between 1 (worst) and 5 (best)',
+        }
+        widgets = {
+            'date_of_visit': forms.DateInput(attrs={'type': 'date', 'max': ''}),
         }

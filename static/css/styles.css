@@ -70,7 +70,6 @@ body {
 .navbar .navbar-nav .nav-link {
   color: #13545e;
 }
-/*----------------------Jidnesh---------------------------*/
 /* Custom styles for Terms and Policies page */
 .terms-box, .privacy-box {
     background-color: #B4CEA8;
@@ -139,6 +138,13 @@ body {
     gap: 12px; /* Added gap between each item */
 }
 
+.cookie-consent-custom-bg {
+    background-color: #F7F9FF !important;
+}
+/*.navbar .navbar-nav .nav-link:hover {*/
+/*    color: #13545e;*/
+/*    font-weight: bold;*/
+/*}*/
 .list-group-item {
     background-color: #B4CEA8;
     border: none;
@@ -151,6 +157,110 @@ body {
     max-width: 600px; /* Center and limit the width of the items */
     text-align: center; /* Center text inside the boxes */
 }
+
+/*.navbar-nav .nav-item .nav-link.btn-sign:hover {*/
+/*    background-color: #0056b3;*/
+/*}*/
+
+.filter-box {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-bottom: 20px;
+}
+.container {
+    margin-top: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    max-width: 100%;    /
+}
+
+@media (min-width: 576px) {
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+.form-group {
+    margin-bottom: 10px;
+    color: black;
+
+}
+
+.header-text {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #FDFDFD;
+    font-family: 'Poppins', sans-serif;
+
+}
+.h5 {
+    font-size: medium;
+    font-family: 'Poppins', sans-serif
+}
+.card-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #FDFDFD;
+    border-radius: 5px;
+}
+
+.card-img-top {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.card-body {
+    padding: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #555;
+    font-family: 'Poppins', sans-serif;
+}
+
+/*.pagination .page-item .page-link {*/
+/*    color: #007bff;*/
+/*    font-family: 'Poppins', sans-serif;*/
+/*}*/
+
+/*.pagination .page-item .page-link:hover {*/
+/*    color: #0056b3;*/
+/*    text-decoration: none;*/
+/*    font-family: 'Poppins', sans-serif;*/
+/*}*/
+
+/*.pagination .page-item.disabled .page-link {*/
+/*    color: #6c757d;*/
+/*    font-family: 'Poppins', sans-serif;*/
+/*}*/
+
 
 .list-group-item:hover {
     background-color: #9ab991;

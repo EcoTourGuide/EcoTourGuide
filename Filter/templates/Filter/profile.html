@@ -4,6 +4,18 @@
 {% block content %}
 <div class="container mt-5">
     <h1 class="text-center mb-6 hero_text">My Profile</h1>
+    <div class="container mt-3">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
     <div class="row">
         <div class="col-md-4">
             <div class="card">
@@ -24,9 +36,12 @@
                             alt="Profile Picture"
                         />
                         {% endif %}
-                        <form id="photo-form" method="post" enctype="multipart/form-data" onsubmit="uploadPhoto(event)">
+                        <form id="photo-form" method="post" enctype="multipart/form-data" action="{% url 'profile' %}">
                             {% csrf_token %}
                             {{ photo_form.profile_photo }}
+                            {% for error in photo_form.profile_photo.errors %}
+                                <div class="alert alert-danger">{{ error }}</div>
+                            {% endfor %}
                             <button type="submit" class="btn btn-success btn-block mt-2 upload-button">Upload Photo</button>
                         </form>
                     </div>
@@ -36,16 +51,10 @@
                     <div class="tab_div">
                         <ul class="nav nav-tabs w-100" id="profileTabs" role="tablist">
                             <li class="nav-item w-100">
-                                <a class="nav-link active w-100 text-left p-3" id="profile-information-tab" href="javascript:void(0);" onclick="loadTabContent('{% url 'profile_information' %}', 'profile-information-tab')">Profile Information</a>
+                                <a class="nav-link active w-100 text-left p-3" id="profile-information-tab" href="javascript:void(0);" onclick="showTabContent('profile-information')">Profile Information</a>
                             </li>
                             <li class="nav-item w-100">
                                 <a class="nav-link w-100 text-left p-3" id="user-history-tab" href="javascript:void(0);" onclick="loadTabContent('{% url 'user_history' %}', 'user-history-tab')">User History</a>
-                            </li>
-                            <li class="nav-item w-100">
-                                <a class="nav-link w-100 text-left p-3" id="newsletter-subscription-tab" href="javascript:void(0);" onclick="loadTabContent('{% url 'newsletter_subscription' %}', 'newsletter-subscription-tab')">Newsletter Subscription</a>
-                            </li>
-                            <li class="nav-item w-100">
-                                <a class="nav-link w-100 text-left p-3" id="manage-notifications-tab" href="javascript:void(0);" onclick="loadTabContent('{% url 'manage_notifications' %}', 'manage-notifications-tab')">Manage Notifications</a>
                             </li>
                         </ul>
                     </div>
@@ -54,45 +63,85 @@
         </div>
         <div class="col-md-8">
             <div id="tab-content" class="tab-content">
-                <!-- Tab content will be loaded here -->
+                <div id="profile-information" class="tab-pane fade show active">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h3 class="pInformation">Personal Information</h3>
+                            <form id="profile-info-form" method="post" action="{% url 'profile' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                    <label class="ml-3 col-form-label">{{ user_form.first_name.label_tag }}</label>
+                                    <div class="col-sm-12">
+                                        {{ user_form.first_name }}
+                                        {% for error in user_form.first_name.errors %}
+                                            <div class="alert alert-danger">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="ml-3 col-form-label">{{ user_form.last_name.label_tag }}</label>
+                                    <div class="col-sm-12">
+                                        {{ user_form.last_name }}
+                                        {% for error in user_form.last_name.errors %}
+                                            <div class="alert alert-danger">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="ml-3 col-form-label">{{ user_form.email.label_tag }}</label>
+                                    <div class="col-sm-12">
+                                        {{ user_form.email }}
+                                        {% for error in user_form.email.errors %}
+                                            <div class="alert alert-danger">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="ml-3 col-form-label">{{ profile_form.date_of_birth.label_tag }}</label>
+                                    <div class="col-sm-12">
+                                        {{ profile_form.date_of_birth }}
+                                        {% for error in profile_form.date_of_birth.errors %}
+                                            <div class="alert alert-danger">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="ml-3 col-form-label">{{ profile_form.phone.label_tag }}</label>
+                                    <div class="col-sm-12">
+                                        {{ profile_form.phone }}
+                                        {% for error in profile_form.phone.errors %}
+                                            <div class="alert alert-danger">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="ml-3 col-form-label">{{ profile_form.location.label_tag }}</label>
+                                    <div class="col-sm-12">
+                                        {{ profile_form.location }}
+                                        {% for error in profile_form.location.errors %}
+                                            <div class="alert alert-danger">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success btn-block">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Other tab content will be loaded here dynamically -->
             </div>
         </div>
     </div>
 </div>
 
 <script>
-  function uploadPhoto(event) {
-    event.preventDefault();
-    var form = document.getElementById("photo-form");
-    var formData = new FormData(form);
-
-    fetch("{% url 'profile_photo_upload' %}", {
-      method: "POST",
-      body: formData,
-      headers: {
-        "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value,
-      },
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.status === 'success') {
-        document.getElementById("profile-photo").src = data.photo_url;
-      } else {
-        alert("Failed to upload photo.");
-      }
-    })
-    .catch(error => {
-      console.error("Error uploading photo:", error);
-      alert("Error uploading photo.");
-    });
-  }
-
   function loadTabContent(url, tabId) {
     fetch(url)
       .then(response => response.text())
       .then(html => {
         document.getElementById("tab-content").innerHTML = html;
         setActiveTab(tabId);
+        loadFormData(); // Load form data from cookies
       })
       .catch(error => {
         console.error("Error loading tab content:", error);
@@ -111,9 +160,50 @@
     });
   }
 
+  function showTabContent(tabId) {
+    const tabContent = document.querySelectorAll(".tab-pane");
+    tabContent.forEach(content => {
+      if (content.id === tabId) {
+        content.classList.add("show", "active");
+      } else {
+        content.classList.remove("show", "active");
+      }
+    });
+    setActiveTab(`${tabId}-tab`);
+  }
+
+  function saveFormData() {
+    const formElements = document.querySelectorAll("#profile-info-form input, #profile-info-form select, #profile-info-form textarea");
+    formElements.forEach(element => {
+      document.cookie = `${element.name}=${element.value}; path=/`;
+    });
+  }
+
+  function loadFormData() {
+    const formElements = document.querySelectorAll("#profile-info-form input, #profile-info-form select, #profile-info-form textarea");
+    formElements.forEach(element => {
+      const value = getCookie(element.name);
+      if (value) {
+        element.value = value;
+      }
+    });
+  }
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  // Save form data before unloading the page
+  window.addEventListener("beforeunload", saveFormData);
+
+  // Load form data when the page is loaded
+  document.addEventListener("DOMContentLoaded", loadFormData);
+
   // Load default tab content
   document.addEventListener("DOMContentLoaded", () => {
-    loadTabContent("{% url 'profile_information' %}", 'profile-information-tab');
+    showTabContent('profile-information');
   });
 </script>
 {% endblock %}

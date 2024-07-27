@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load repeat_filter %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-4">
+        <!-- Images Section -->
+        <div class="row">
+            <div class="image-grid">
+                <div class="main-image ">
+                    <img src="{{ destination.image1 }}" alt="Main Image">
+                </div>
+                <div class="stacked-images">
+                    <div class="stacked-image">
+                        <img src="{{ destination.image2 }}" alt="Stacked Image 1">
+                    </div>
+                    <div class="stacked-image">
+                        <img src="{{ destination.image3 }}" alt="Stacked Image 2">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Section -->
+        <div class="row">
+            <div class="col-md-8">
+                <h2 class="font-weight-bold" style="margin-top: 2rem">{{ destination.prop_name }}</h2>
+                <div class="review-rating">
+                    {% for i in average_rating|times %}
+                        <i class="fas fa-star" style="color: #F2994A; font-size: 1.5rem"></i>
+                    {% endfor %}
+                    <span style="color:black">  ({{ total_reviews }} reviews)</span>
+                </div>
+                <p><i class="fas fa-map-marker-alt"></i> {{ destination.phy_addr }}</p>
+                <div class="overview bg-light p-3 mb-3">
+                    <h5>Overview</h5>
+                    <p>{{ destination_details.description }}</p>
+                </div>
+
+                <div class="overview bg-light p-3 mb-3">
+                    <div class="facilities">
+                        <h5><i class="fas fa-hiking" style="font-size: 1.5rem"></i> Available activities</h5>
+                        <ul class="list-inline">
+                            {% for activity in destination_details.available_activities %}
+                                <li class="list-inline-item"><i class="fas fa-dot-circle" style="color: #13545e"></i> {{ activity }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="overview bg-light p-3 mb-3">
+                     <div class="facilities">
+                        <h5><i class="fas fa-leaf" style="font-size: 1.5rem"></i>  Eco-friendly amenities</h5>
+                        <ul class="list-inline">
+                            {% for activity in destination_details.amenities %}
+                                <li class="list-inline-item"><i class="fas fa-dot-circle" style="color: #13545e"></i> {{ activity }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="overview bg-light p-3 mb-3">
+                    <div class="facilities">
+                    <h5><i class="fas fa-tree" style="font-size: 1.5rem"></i> Palm level</h5>
+                    <p>
+                        <span class="text-warning">
+                            {% for i in palm_rating_range %}
+                                <i class="fas fa-star" style="color: #13545e; font-size: 2rem"></i>
+                            {% endfor %}
+                            {% if palm_rating_range is 1|times %}
+                                <p style="font-size: 1.5rem">Between 212 and 398 points</p>
+                            {% elif palm_rating_range is 2|times %}
+                                <p style="font-size: 1.5rem">Between 399 and 557 points</p>
+                            {% elif palm_rating_range is 3|times %}
+                                <p style="font-size: 1.5rem">Between 558 and 717 points</p>
+                            {% elif palm_rating_range is 4|times %}
+                                <p style="font-size: 1.5rem">Between 718 and 796 points</p>
+                            {% endif %}
+                        </span>
+                    </p>
+                </div>
+                </div>
+
+                <div class="policies bg-light p-3">
+                    <h5>Policies</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>Price range: {{ destination_details.price_range }}</li>
+                                <li>Availability: {{ destination_details.availability }}</li>
+                                <li>Pet friendly: {{ destination_details.pet_friendly }}</li>
+                                <li>Accessibility: {{ destination_details.accessibility }}</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul>
+                                <li>Environmental practices: {{ destination_details.environmental_practices }}</li>
+                                <li>Conservation project undertook: {{ destination_details.conservation_projects }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+{#                <div class="map mb-3">#}
+{#                    <div id="mapCanvas"></div>#}
+{#                </div>#}
+
+                <div class="explore-area mb-3">
+                    <h5>Explore the area</h5>
+                    <ul class="list-unstyled">
+                        {% for destination in nearby_destinations %}
+                            <li><i class="fas fa-map-marker-alt"></i> {{ destination.prop_name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <a href="{{ destination.web }}" class="btn btn-success btn-block mt-3" role="button" style="background-color: #13545e">Visit the website</a>
+                    <a href="{% url 'review' destination.object_id %}" class="btn btn-success btn-block mt-3" role="button" style="background-color: #13545e">Add review</a>
+                </div>
+
+                 <div class="policies bg-light p-3">
+                    {% if total_reviews is 0 %}
+                        <h5>Reviews</h5>
+                        <p style="font-size: 1.3rem">No reviews yet!</p>
+                    {% else%}
+                        <h5>Reviews</h5>
+                        {% for review in reviews %}
+                             <div class="review-tile">
+                                 <div class="review-avatar">
+                                        <img src="{% static 'images/user.png' %}" alt="User Avatar">
+                                 </div>
+                                 <div class="review-content">
+                                    <div class="review-username">{{ review.name }}</div>
+                                        <div class="review-rating">
+                                            {% for i in review.rating|times %}
+                                                <i class="fas fa-star" style="color: #F2994A; font-size: 1.5rem"></i>
+                                            {% endfor %}
+                                        </div>
+                                    <div class="review-text">{{ review.review_title }}</div>
+                                 </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                 </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

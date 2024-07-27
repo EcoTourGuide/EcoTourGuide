@@ -1,7 +1,10 @@
+# authentication/forms.py
+
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
+
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
@@ -19,3 +22,7 @@ class CustomUserCreationForm(UserCreationForm):
         if len(password) < 8 or not any(char.isdigit() for char in password) or not any(char.isalpha() for char in password):
             raise ValidationError("Use 8 or more characters with a mix of letters, numbers & symbols.")
         return password
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    remember_me = forms.BooleanField(required=False, initial=False)

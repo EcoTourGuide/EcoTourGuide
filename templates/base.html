@@ -20,7 +20,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="{% url 'index' %}">
-            <img src="{% static 'home/images/logo.png' %}" alt="EcoTourGuide Logo" style="height: 50px;">
+            <img src="{% static 'home/images/logo.png' %}" alt="StayHub Logo" style="height: 50px;">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -30,14 +30,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'index' %}">Home</a>
                 </li>
-                </li>
-                
+            
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'explore' 1 %}">Explore</a>
                 </li>
+            
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
+                    <a class="nav-link" href="{% url 'aboutus' %}">About Us</a>
                 </li>
+               
                 {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -45,7 +46,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
-                        <a class="dropdown-item" href="#">Logout</a>
+                        <a class="dropdown-item" href="{% url 'authentication:logout' %}">Logout</a>
                     </div>
                 </li>
                 {% else %}
@@ -65,13 +66,19 @@
         {% block content %}
         {% endblock %}
     </div>
-
+    
+    <div id="cookie-consent" class="fixed-bottom cookie-consent-custom-bg text-dark text-center py-3 d-none">
+        <p class="mb-0">
+            This website uses cookies to ensure you get the best experience on our website.
+            <button id="accept-cookies" class="btn btn-primary btn-sm ml-2">Got it!</button>
+        </p>
+    </div>
     <!-- Footer -->
     <footer class="footer bg-light text-center text-lg-start mt-auto">
-        <div class="container-fluid bg-light text-dark mt-4 py-3">
+        <div style="background-color: #8F9090" class="container-fluid bg-light text-dark mt-4 py-3">
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="{% url 'index' %}">
                         <img src="{% static 'home/images/logo.png' %}" alt="EcoTourGuide Logo" style="height: 50px;">
                     </a>
                     <p>Your next goto companion for travel</p>
@@ -79,25 +86,25 @@
                 <div class="col-md-2 mb-3">
                     <h5>About</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#", style="color: black">About</a></li>
-                        <li><a href="{% url 'contact' %}", style="color: black" >Contact us</a></li>
+                        <li><a href="{% url 'aboutus' %}", style="color: black">About</a></li>
+                        <li><a href="{% url 'contactus' %}", style="color: black" >Contact us</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 mb-3">
                     <h5>Destinations</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#", style="color: black">Australia</a></li>
-                        <li><a href="#", style="color: black">New Zealand</a></li>
-                        <li><a href="#", style="color: black">United States America (USA)</a></li>
-                        <li><a href="#", style="color: black">Greece</a></li>
-                        <li><a href="#", style="color: black">Maldives</a></li>
+                        <li><a href="{% url 'explore' 1 %}?city=Riviera%20Beach" style="color: black;">Riviera Beach</a></li>
+                        <li><a href="{% url 'explore' 1 %}?city=Ft.%20Lauderdale" style="color: black;">Ft. Lauderdale</a></li>
+                        <li><a href="{% url 'explore' 1 %}?city=Boca%20Grande" style="color: black;">Boca Grande</a></li>
+                        <li><a href="{% url 'explore' 1 %}?city=Lake%20Mary" style="color: black;">Lake Mary</a></li>
+                        <li><a href="{% url 'explore' 1 %}?city=Doral" style="color: black;">Doral</a></li>
+                        <li><a href="{% url 'explore' 1 %}?city=Surfside" style="color: black;">Surfside</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 mb-3">
                     <h5>Legal</h5>
                     <ul class="list-unstyled">
-                        <li><a href="{% url 'terms-policies' %}", style="color: black">Privacy Policy</a></li>
-                        <li><a href="{% url 'terms-policies' %}", style="color: black">Terms of use</a></li>
+                        <li><a href="{% url 'terms-policies' %}", style="color: black">Terms & policies</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 mb-3">
@@ -120,9 +127,23 @@
         <div class="text-dark text-center py-3" style="background-color: #B4CEA8;">
                 &copy; EcoTourGuide 2024
         </div>
-
+        
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cookieConsent = document.getElementById('cookie-consent');
+            const acceptCookies = document.getElementById('accept-cookies');
+            
+            if (!localStorage.getItem('cookiesAccepted')) {
+                cookieConsent.classList.remove('d-none');
+            }
 
+            acceptCookies.addEventListener('click', function () {
+                localStorage.setItem('cookiesAccepted', 'true');
+                cookieConsent.classList.add('d-none');
+            });
+        });
+    </script>
     <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

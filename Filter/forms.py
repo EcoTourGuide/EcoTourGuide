@@ -11,6 +11,7 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'email']
 
+
 class UserProfileForm(forms.ModelForm):
     date_of_birth = forms.DateField(required=True, widget=forms.DateInput(attrs={'type': 'date'}))
     phone = forms.CharField(required=True)
@@ -19,6 +20,7 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['date_of_birth', 'phone', 'location', 'profile_photo']
+
 
 class ProfilePhotoForm(forms.ModelForm):
     profile_photo = forms.ImageField(required=True)

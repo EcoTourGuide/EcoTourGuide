@@ -1,21 +1,27 @@
+import json
 import math
 
 import requests
+from django import forms
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db.models import Avg
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from urllib.parse import quote
-from django.contrib import messages
-from .forms import ContactForm
-from .models import TravelDestination, ContactMessage
+
+from django.urls import reverse
+
+from Filter.models import History
+from .forms import ContactForm, ReviewForm
+from .models import TravelDestination, TravelDestinationDetails, Review
 
 
 def index(request):
     return render(request, "home/index.html", {})
 
 
-def fetch_destinations(request, page):
-    # page = int(request.GET.get('page', 1))
+def fetch_destinations(request, page=1):
     limit = 30
     offset = (page - 1) * limit
 
@@ -52,9 +58,18 @@ def fetch_destinations(request, page):
     page_data = stored_records[offset:offset + limit]
     total_pages = math.ceil(stored_records.count() / limit)
 
-    return render(request, 'home/explore.html', {'destinations': page_data, 'curr_page': page, "total_pages": total_pages})
+    # Fetch user history
+    visited_sites = History.objects.filter(user=request.user).order_by('-timestamp')
 
-def fetch_and_save_destinations(offset=0, limit=10):
+    return render(request, 'home/explore.html', {
+        'destinations': page_data,
+        'curr_page': page,
+        'total_pages': total_pages,
+        'visited_sites': visited_sites,
+    })
+
+
+def fetch_and_save_destinations(offset=0, limit=343):  #max record is 343
     encoded_out_fields = quote('*')
 
     api_url = (f"https://ca.dep.state.fl.us/arcgis/rest/services/OpenData/OSI_DATA/MapServer/0/query?where=1%3D1"
@@ -104,14 +119,26 @@ def fetch_and_save_destinations(offset=0, limit=10):
         print("Failed to fetch data from the API. Status code:", response.status_code)
         return -1
 
-###############JIDNESH###############
-def support(request):
-    return render(request, 'home/support.html')
-def contact_us(request):
-    return render(request, 'home/contact_us.html')
+@login_required
+def review(request, destination_id):
+    destination = get_object_or_404(TravelDestination, object_id=destination_id)
+    review_submitted = False
 
-def terms_policies(request):
-    return render(request, 'home/terms_policies.html')
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.reviewer = request.user
+            review.reviewed_facility = destination
+            review.save()
+            review_submitted = True
+            # return redirect(reverse('details', args=[destination_id]))
+    else:
+        form = ReviewForm()
+
+    return render(request, 'home/review.html',
+                  {'review_form': form, 'destination_id': destination_id, 'review_submitted': review_submitted})
+
 
 def details(request, destination_id):
     destination = TravelDestination.objects.get(pk=destination_id)
@@ -140,18 +167,22 @@ def details(request, destination_id):
     return render(request, "home/details.html", context)
 
 
+def get_suggestions(request):
+    query = request.GET.get('query', '')
+    if query:
+        suggestions = TravelDestination.objects.filter(city__icontains=query).values_list('city', flat=True).distinct()
+        suggestions_list = list(suggestions)
+    else:
+        suggestions_list = []
+
+    return JsonResponse(suggestions_list, safe=False)
+
 
 def aboutus(request):
     return render(request, 'home/aboutus.html')
 
 
-
-
-
-# contact/views.py
-
-
-def contact_view(request):
+def contact_us(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -170,3 +201,9 @@ def contact_view(request):
     return render(request, 'home/contactus.html', {'form': form})
 
 
+def support(request):
+    return render(request, 'home/support.html')
+
+
+def terms_policies(request):
+    return render(request, 'home/terms_policies.html')

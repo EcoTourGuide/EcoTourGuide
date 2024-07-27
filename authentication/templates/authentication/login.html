@@ -1,4 +1,3 @@
-
 {% block content %}
 {% load static %}
 <style>
@@ -41,7 +40,7 @@
         color: #555;
     }
     .form-group input {
-        width: 100%;
+        {#width: 100%;#}
         padding: 10px;
         border: 2px solid #B8C8BB;
         border-radius: 5px;
@@ -88,6 +87,18 @@
     .signup-link a:hover {
         text-decoration: underline;
     }
+    .form-check-inline {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        justify-content: start;
+    }
+    .password-input{
+        width: 100%;
+    }
+    .username-input{
+        width: 100%;
+    }
 </style>
 
 <div class="package">
@@ -98,11 +109,15 @@
             {% csrf_token %}
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" class="username-input" name="username" required value="{{ form.username.value }}">
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" class="password-input" id="password" name="password" required value="{{ form.password.value }}">
+            </div>
+            <div class="form-group form-check-inline">
+                <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me" {% if form.remember_me.value %}checked{% endif %}>
+                <label class="form-check-label" for="remember_me">Remember Me</label>
             </div>
             {% if request.GET.next %}
                 <input type="hidden" name="next" value="{{ request.GET.next }}">
@@ -114,6 +129,10 @@
 
         <div class="signup-link">
             <p>Don't have an account? <a href="{% url 'authentication:signup' %}">Sign up</a></p>
+        </div>
+
+        <div class="signup-link">
+            <p><a href="{% url 'authentication:forgot_password' %}">Forgot password?</a></p>
         </div>
     </div>
 </div>

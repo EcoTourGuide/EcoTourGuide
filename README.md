@@ -1,7 +1,7 @@
 # Eco-Tourism Guide
 
 ## Introduction
-The Eco-Tourism Guide is a Django-based web platform designed to promote sustainable travel. Our platform provides information on eco-friendly travel destinations and activities, featuring a comprehensive directory of accommodations, tours, and conservation projects that prioritize environmental responsibility. Users can browse, review, and book eco-friendly travel options, fostering a community of like-minded travelers committed to reducing their environmental impact.
+The Eco-Tourism Guide is a Django-based web platform designed to promote sustainable travel. Our platform provides information on eco-friendly travel destinations and activities, featuring a comprehensive directory of accommodations, tours, and conservation projects that prioritize environmental responsibility. Users can browse, review, and book eco-friendly travel options, fostering a community of like-minded travellers committed to reducing their environmental impact.
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -55,9 +55,9 @@ The Eco-Tourism Guide is a Django-based web platform designed to promote sustain
     ```bash
     cd eco-tourism-guide
     ```
-3. Install the required dependencies:
+3. Make migrations:
     ```bash
-    pip install -r requirements.txt
+    python manage.py makemigrations
     ```
 4. Apply migrations:
     ```bash
@@ -80,23 +80,4 @@ The Eco-Tourism Guide is a Django-based web platform designed to promote sustain
 - Database settings and other configurations can be found in the `settings.py` file.
 - Customize settings such as `DEBUG`, `ALLOWED_HOSTS`, and database configurations as needed.
 
-## Dependencies
-- Django
-- Other dependencies are listed in the `requirements.txt` file.
-
-## Contributing
-1. Fork the repository.
-2. Create a new branch:
-    ```bash
-    git checkout -b feature-name
-    ```
-3. Make your changes and commit them:
-    ```bash
-    git commit -m "Add some feature"
-    ```
-4. Push to the branch:
-    ```bash
-    git push origin feature-name
-    ```
-5. Create a new Pull Request.
 
